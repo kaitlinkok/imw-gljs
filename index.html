@@ -108,6 +108,20 @@ for (i = 0; i < layers.length; i++) {
   item.appendChild(key);
   item.appendChild(value);
   legend.appendChild(item);
+
+map.on('mousemove', function(e) {
+  var provinces = map.queryRenderedFeatures(e.point, {
+    layers: ['canada-pop']
+  });
+
+  if (provinces.length > 0) {
+    document.getElementById('pd').innerHTML = '<h3><strong>' + provinces[0].properties.NAME + '</strong></h3><p><strong><em>' + provinces[0].properties.aboriginal_pop + '</strong>Aboriginal population</em></p>';
+  } else {
+    document.getElementById('pd').innerHTML = '<p>Hover over a province!</p>';
+  }
+});
+map.fitBounds([[-188.0859375, 37.1603165], [-30.5859375, 83.3595113]]);
+  
 }
 
 });
